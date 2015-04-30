@@ -143,7 +143,10 @@ function commerce_marketplace_paypal_wps_adaptive_get_paykey($form, $form_state)
       $receiver['primary'] = 'false';
     }
 
-    $receivers[] = $receiver;
+    // Hack to prevent inclusion of empty orders
+    if ($receiver['amount'] > 0) {
+    	$receivers[] = $receiver;
+    }
   }
 
   // Add marketplace fees to receivers array.
